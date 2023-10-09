@@ -2,6 +2,7 @@ import 'package:test/test.dart';
 
 import 'boilerplate.dart';
 import 'global_state.dart' as global_state;
+
 // Question: Can setUpAlls() in sibling groups run after tests in another group?
 // Answer: yes.
 
@@ -9,9 +10,9 @@ import 'global_state.dart' as global_state;
 // still executed. This means their setUpAll callbacks run.
 // Question: How to know whether to skip execution of a setUpAll callbacks?
 
-// Idea
+// Idea:
 //
-// If, inside setUpAll calllback, the requestedTestName contains the whole
+// If (inside setUpAll callback), the requestedTestName contains the whole
 // parentGroupName, then execute the callbacks. Otherwise skip it.
 
 void main() {
@@ -27,8 +28,8 @@ void main() {
   });
 
   group('B', () {
-    // Question: do the 2 setUpAlls below run before tests in group A?
-    // Answer: no, of course not.
+    // Question: Do the 2 setUpAlls below run before tests in group A?
+    // Answer: No.
 
     patrolSetUpAll(setUpAllBody);
     patrolSetUpAll(setUpAllBody);

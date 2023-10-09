@@ -1,6 +1,4 @@
 import 'package:test/test.dart';
-// ignore: depend_on_referenced_packages
-import 'package:test_api/src/backend/invoker.dart';
 
 import 'global_state.dart' as global_state;
 
@@ -9,19 +7,23 @@ import 'global_state.dart' as global_state;
 /// It keeps track of calls made to setUpAll.
 void patrolSetUpAll(Future<void> Function() body) {
   setUpAll(() async {
-    final parentGroupsName = Invoker.current!.liveTest.groups.last.name;
+    final parentGroupsName = global_state.currentGroupFullName;
 
     final name = addSetUpAll(parentGroupsName);
 
-    // Skip calling body if is in test discovery phase
+    // TODO: Skip calling body if is in test discovery phase
 
-    // Skip calling body if it was already executed
+    // TODO: Skip calling body if it was already executed
 
     // Skip calling if parentGroupName is not a substring of requestedTestName
+    if (!global_state.requestedTest.contains(parentGroupsName)) {
+      // This is not exhaustive.
+      return;
+    }
 
     body();
 
-    // Mark this setUpAll as executed
+    // TODO: Mark this setUpAll as executed
   });
 }
 
@@ -30,7 +32,6 @@ void patrolTest(String name, Future<void> Function() body) {
     final currentTest = global_state.currentTestFullName;
 
     if (currentTest == global_state.requestedTest) {
-      print('Requested test $currentTest, will execute it');
       await body();
     }
   });
