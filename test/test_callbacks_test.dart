@@ -1,24 +1,22 @@
 import 'package:test/test.dart';
 
-// ignore: depend_on_referenced_packages
-
 import 'boilerplate.dart';
 
 void main() {
   group('A', () {
-    customSetUpAll(setUpAllBody);
+    patrolSetUpAll(setUpAllBody);
 
-    customSetUpAll(setUpAllBody);
+    patrolSetUpAll(setUpAllBody);
 
     group('B', () {
-      customSetUpAll(setUpAllBody);
-      customSetUpAll(setUpAllBody);
-      customSetUpAll(setUpAllBody);
-      customSetUpAll(setUpAllBody);
+      patrolSetUpAll(setUpAllBody);
+      patrolSetUpAll(setUpAllBody);
+      patrolSetUpAll(setUpAllBody);
+      patrolSetUpAll(setUpAllBody);
 
       group('C', () {
-        customSetUpAll(setUpAllBody);
-        customSetUpAll(setUpAllBody);
+        patrolSetUpAll(setUpAllBody);
+        patrolSetUpAll(setUpAllBody);
       });
     });
 

@@ -7,7 +7,7 @@ import 'global_state.dart' as global_state;
 /// A modification of [setUpAll] that works with Patrol's native automation.
 ///
 /// It keeps track of calls made to setUpAll.
-void customSetUpAll(Future<void> Function() body) {
+void patrolSetUpAll(Future<void> Function() body) {
   setUpAll(() async {
     final parentGroupsName = Invoker.current!.liveTest.groups.last.name;
 
@@ -71,5 +71,5 @@ Future<void> testBody() async {
 }
 
 Future<void> setUpAllBody() async {
-  print(global_state.currentGroupFullName);
+  print('setUpAll in group ${global_state.currentTestFullName}');
 }

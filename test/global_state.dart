@@ -2,7 +2,7 @@
 import 'package:test_api/src/backend/invoker.dart';
 
 // Input
-const String requestedTest = 'A testA';
+String get requestedTest => 'A testA';
 
 /// A list holding IDs of all setUpAll callbacks.
 ///

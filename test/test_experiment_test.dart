@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
-// ignore: depend_on_referenced_packages
-import 'package:test_api/src/backend/invoker.dart';
 
+import 'boilerplate.dart';
+import 'global_state.dart' as global_state;
 // Question: Can setUpAlls() in sibling groups run after tests in another group?
 // Answer: yes.
 
@@ -15,43 +15,26 @@ import 'package:test_api/src/backend/invoker.dart';
 // parentGroupName, then execute the callbacks. Otherwise skip it.
 
 void main() {
-  group('A', () {
-    setUpAll(_setUpAllBody);
-    setUpAll(_setUpAllBody);
+  print('Requested test ${global_state.requestedTest}');
 
-    test('testA', _testBody);
-    test('testB', _testBody);
-    test('testC', _testBody);
+  group('A', () {
+    patrolSetUpAll(setUpAllBody);
+    patrolSetUpAll(setUpAllBody);
+
+    patrolTest('testA', testBody);
+    patrolTest('testB', testBody);
+    patrolTest('testC', testBody);
   });
 
   group('B', () {
     // Question: do the 2 setUpAlls below run before tests in group A?
     // Answer: no, of course not.
 
-    setUpAll(_setUpAllBody);
-    setUpAll(_setUpAllBody);
+    patrolSetUpAll(setUpAllBody);
+    patrolSetUpAll(setUpAllBody);
 
-    test('testA', _testBody);
-    test('testB', _testBody);
-    test('testC', _testBody);
+    patrolTest('testA', testBody);
+    patrolTest('testB', testBody);
+    patrolTest('testC', testBody);
   });
-}
-
-Future<void> _testBody() async {
-  print(Invoker.current!.fullCurrentTestName);
-}
-
-Future<void> _setUpAllBody() async {
-  print('setUpAll in group ${Invoker.current!.currentGroupFullName}');
-}
-
-extension on Invoker {
-  String get fullCurrentTestName {
-    final parentGroupName = liveTest.groups.last.name;
-    final testName = liveTest.individualName;
-
-    return '$parentGroupName $testName';
-  }
-
-  String get currentGroupFullName => Invoker.current!.liveTest.groups.last.name;
 }
