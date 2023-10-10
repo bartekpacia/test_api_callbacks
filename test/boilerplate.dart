@@ -16,7 +16,7 @@ void patrolSetUpAll(Future<void> Function() body) {
     // TODO: Skip calling body if it was already executed
 
     // Skip calling if parentGroupName is not a substring of requestedTestName
-    if (!global_state.requestedTest.contains(parentGroupsName)) {
+    if (!global_state.requestedTest.startsWith(parentGroupsName)) {
       // This is not exhaustive.
       return;
     }
@@ -68,9 +68,9 @@ void printSetUpAlls() {
 }
 
 Future<void> testBody() async {
-  print(global_state.currentTestFullName);
+  print('Run test "${global_state.currentTestFullName}"');
 }
 
 Future<void> setUpAllBody() async {
-  print('setUpAll in group ${global_state.currentTestFullName}');
+  print('setUpAll in group "${global_state.currentGroupFullName}"');
 }
