@@ -6,6 +6,10 @@ String _requestedTest = 'A testA';
 String get requestedTest => _requestedTest;
 set requestedTest(String value) => _requestedTest = value;
 
+bool _isInTestDiscoveryPhase = false;
+bool get isInTestDiscoveryPhase => _isInTestDiscoveryPhase;
+set isInTestDiscoveryPhase(bool value) => _isInTestDiscoveryPhase = value;
+
 /// A list holding IDs of all setUpAll callbacks.
 ///
 /// This is basically the list of groupNames + an index appended.

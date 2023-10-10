@@ -12,6 +12,10 @@ void patrolSetUpAll(Future<void> Function() body) {
     final name = addSetUpAll(parentGroupsName);
 
     // TODO: Skip calling body if is in test discovery phase
+    if (global_state.isInTestDiscoveryPhase) {
+      print("Skipping setUpAll '$name' because it's test discovery phase");
+      return;
+    }
 
     // TODO: Skip calling body if it was already executed
 

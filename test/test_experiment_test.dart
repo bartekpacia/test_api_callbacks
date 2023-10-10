@@ -16,7 +16,9 @@ import 'global_state.dart' as global_state;
 // parentGroupName, then execute the callbacks. Otherwise skip it.
 
 void main() {
-  print('Requested test ${global_state.requestedTest}');
+  global_state.requestedTest = 'B testA';
+  global_state.isInTestDiscoveryPhase = true;
+  print('Requested test "${global_state.requestedTest}"');
 
   group('A', () {
     patrolSetUpAll(setUpAllBody);
@@ -37,5 +39,9 @@ void main() {
     patrolTest('testA', testBody);
     patrolTest('testB', testBody);
     patrolTest('testC', testBody);
+  });
+
+  tearDownAll(() {
+    printSetUpAlls();
   });
 }
